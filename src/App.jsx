@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import { usePouchDB } from './hooks/usePouchDb'
 import { useReadingList } from './hooks/useReadingList'
 
@@ -28,13 +28,13 @@ export default function App () {
   }
 
   // Reorder styles between antd and tailwindcss
-  useEffect(() => {
-    const head = document.querySelector('head')
-    const tailWindStyleTag = [...head.querySelectorAll('style')].find((style) =>
-      style.innerHTML.includes('tailwind')
-    )
-    head.insertAdjacentElement('afterbegin', tailWindStyleTag)
-  }, [])
+  // useEffect(() => {
+  //   const head = document.querySelector('head')
+  //   const tailWindStyleTag = [...head.querySelectorAll('style')].find((style) =>
+  //     style.innerHTML.includes('tailwind')
+  //   )
+  //   head.insertAdjacentElement('afterbegin', tailWindStyleTag)
+  // }, [])
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
