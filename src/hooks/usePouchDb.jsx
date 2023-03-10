@@ -2,7 +2,7 @@ import { useMemo, useEffect, useState } from 'react'
 import PouchDb from 'pouchdb-browser'
 
 // Define remote url with username and password
-const REMOTE_URL = 'http://admin:secret@couchdb.wildanzr.my.id/reading_lists'
+const REMOTE_URL = 'https://admin:secret@couchdb.wildanzr.my.id/reading_lists'
 
 export const usePouchDB = () => {
   // DB States
