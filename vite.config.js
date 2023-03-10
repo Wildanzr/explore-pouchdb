@@ -86,7 +86,7 @@ export default defineConfig(async ({ mode }) => {
     build: {
       // minify: false,
       // target: "es2015",
-      outDir: 'dist_web',
+      outDir: 'dist',
       sourcemap: true,
       commonjsOptions: { include: [] },
       rollupOptions: {
