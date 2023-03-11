@@ -3,7 +3,7 @@ import { Alert } from 'antd'
 
 const RenderMessage = ({ msg }) => {
   return (
-    <div className="w-full h-full">
+    <div className="w-32 h-full">
       <p className="w-32 text-xs">{msg}</p>
     </div>
   )
@@ -13,8 +13,9 @@ export default function AliveOrNot () {
   // PouchDB
   const { alive } = usePouchDB()
   return (
-    <div className="w-full flex absolute flex-col items-end justify-end bottom-0 right-0">
+    <div className="w-full flex sticky flex-col items-end justify-end bottom-0 right-0 -z-30">
       <Alert
+        className='flex'
         message={alive ? 'Online' : 'Offline'}
         type={alive ? 'success' : 'error'}
         showIcon

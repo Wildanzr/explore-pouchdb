@@ -2,7 +2,9 @@ import { useEffect } from 'react'
 import { usePouchDB } from './hooks/usePouchDb'
 import { useReadingList } from './hooks/useReadingList'
 
-import { AddReadingElement, Header, AliveOrNot } from './components'
+import { AddReadingElement, Header, AliveOrNot, Todos } from './components'
+
+import { nanoid } from 'nanoid'
 
 export default function App () {
   const { db, alive } = usePouchDB()
@@ -11,6 +13,7 @@ export default function App () {
   const handleAddElement = (name) => {
     // post sends a document to the database and generates the unique ID for us
     db.post({
+      _id: `rl-${new Date().getTime()}-${nanoid()}`,
       name,
       read: false
     })
@@ -41,42 +44,13 @@ export default function App () {
   }, [])
 
   return (
-    <div className="w-full h-screen relative flex flex-col items-center justify-start space-y-4">
+    <div className="w-full h-full flex flex-col items-center justify-between space-y-4">
       <Header />
-      <div>
-        {documents.length
-          ? (
-          <ul>
-            {documents.map((doc) => (
-              <li key={doc._id}>{doc.name}</li>
-            ))}
-          </ul>
-            )
-          : (
-          <div>No books to read added, yet</div>
-            )}
-      </div>
-
-      {documents.length
-        ? (
-        <ul>
-          {documents.map((doc) => (
-            <li key={doc._id}>
-              <input
-                type="checkbox"
-                checked={doc.read}
-                onChange={() => handleToggleRead(doc)}
-                id={doc._id}
-              />
-              <label htmlFor={doc._id}>{doc.name}</label>
-              <button onClick={() => handleRemoveElement(doc)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-          )
-        : (
-        <div>No books to read added, yet</div>
-          )}
+      <Todos
+        handleRemoveElement={handleRemoveElement}
+        handleToggleRead={handleToggleRead}
+        documents={documents}
+      />
 
       <AddReadingElement handleAddElement={handleAddElement} />
       <AliveOrNot />
