@@ -1,12 +1,12 @@
-// import { useEffect } from 'react'
+import { useEffect } from 'react'
 import { usePouchDB } from './hooks/usePouchDb'
 import { useReadingList } from './hooks/useReadingList'
 
-import AddReadingElement from './components/AddReadingElement'
+import { AddReadingElement, Header, AliveOrNot } from './components'
 
 export default function App () {
   const { db, alive } = usePouchDB()
-  const { loading, documents } = useReadingList(db, alive)
+  const { documents } = useReadingList(db, alive)
 
   const handleAddElement = (name) => {
     // post sends a document to the database and generates the unique ID for us
@@ -28,27 +28,22 @@ export default function App () {
   }
 
   // Reorder styles between antd and tailwindcss
-  // useEffect(() => {
-  //   const head = document.querySelector('head')
-  //   const tailWindStyleTag = [...head.querySelectorAll('style')].find((style) =>
-  //     style.innerHTML.includes('tailwind')
-  //   )
-  //   head.insertAdjacentElement('afterbegin', tailWindStyleTag)
-  // }, [])
+  useEffect(() => {
+    const reorderTailwind = () => setTimeout(() => {
+      const head = document.querySelector('head')
+      const tailWindStyleTag = [...head.querySelectorAll('style')].find((style) =>
+        style.innerHTML.includes('tailwind')
+      )
+      head.insertAdjacentElement('afterbegin', tailWindStyleTag)
+    }, 5000)
+
+    reorderTailwind()
+  }, [])
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full h-screen relative flex flex-col items-center justify-start space-y-4">
+      <Header />
       <div>
-        <h1>Definitely not a todo list</h1>
-        {!alive && (
-          <div>
-            <h2>Warning</h2>
-            The connection with the database has been lost, you can still work
-            on your documents, we will sync everything once the connection is
-            re-established.
-          </div>
-        )}
-        {loading && <div>loading...</div>}
         {documents.length
           ? (
           <ul>
@@ -84,6 +79,7 @@ export default function App () {
           )}
 
       <AddReadingElement handleAddElement={handleAddElement} />
+      <AliveOrNot />
     </div>
   )
 }
