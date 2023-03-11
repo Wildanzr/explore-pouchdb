@@ -22,7 +22,7 @@ export const usePouchDB = () => {
       remoteDb.info()
         .then(() => setAlive(true))
         .catch(() => setAlive(false))
-    }, 1000)
+    }, 5000)
 
     return () => clearInterval(cancelInterval)
   }, [remoteDb])

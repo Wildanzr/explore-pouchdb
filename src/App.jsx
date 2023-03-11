@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { usePouchDB } from './hooks/usePouchDb'
 import { useReadingList } from './hooks/useReadingList'
 
-import { AddReadingElement, Header, AliveOrNot, Todos } from './components'
+import { Header, AliveOrNot, Todos, AddTodo } from './components'
 
 import { nanoid } from 'nanoid'
 
@@ -45,15 +45,14 @@ export default function App () {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-between space-y-4">
+      <AliveOrNot />
       <Header />
+      <AddTodo handleAddElement={handleAddElement} />
       <Todos
         handleRemoveElement={handleRemoveElement}
         handleToggleRead={handleToggleRead}
         documents={documents}
       />
-
-      <AddReadingElement handleAddElement={handleAddElement} />
-      <AliveOrNot />
     </div>
   )
 }

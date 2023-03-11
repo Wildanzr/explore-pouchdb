@@ -13,7 +13,7 @@ export default function AliveOrNot () {
   // PouchDB
   const { alive } = usePouchDB()
   return (
-    <div className="w-full flex sticky flex-col items-end justify-end bottom-0 right-0 -z-30">
+    <div className="w-full flex sticky flex-col items-end justify-end top-0 right-0 -z-30">
       <Alert
         className='flex'
         message={alive ? 'Online' : 'Offline'}

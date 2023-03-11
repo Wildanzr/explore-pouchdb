@@ -48,7 +48,6 @@ export default function Todos (props) {
 
   useEffect(() => {
     const sortedTodos = mapTodos.sort((a, b) => a.no - b.no)
-    console.log(sortedTodos)
     setTodos(sortedTodos)
   }, [documents])
   return (
